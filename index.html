@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>App de Notas PWA</title>
+    <meta name="description" content="Aplicación de notas con buscador, instalable como PWA">
+    <meta name="theme-color" content="#6200ee">
+    
+    <!-- Manifest PWA -->
+    <link rel="manifest" href="manifest.json">
+    
+    <!-- Estilos CSS -->
+    <link rel="stylesheet" href="styles.css">
+    
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="icons/icon-192x192.png">
+    
+    <!-- iOS Support -->
+    <link rel="apple-touch-icon" href="icons/icon-192x192.png">
+    <meta name="apple-mobile-web-app-status-bar" content="#6200ee">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📝 Mis Notas</h1>
+            <p class="subtitle">Guarda tus ideas importantes</p>
+        </header>
+        
+        <!-- Buscador -->
+        <div class="search-container">
+            <input type="text" id="searchInput" placeholder="Buscar notas..." class="search-input">
+            <button id="clearSearch">✕</button>
+        </div>
+        
+        <!-- Formulario para añadir notas -->
+        <div class="note-form">
+            <input type="text" id="noteInput" placeholder="Escribe una nueva nota..." class="note-input">
+            <button id="addBtn" class="add-button">➕ Añadir</button>
+        </div>
+        
+        <!-- Lista de notas -->
+        <ul id="notesList" class="notes-list"></ul>
+        
+        <!-- Contador de notas -->
+        <div class="counter" id="counter">0 notas</div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="app.js"></script>
+    
+    <!-- Registro del Service Worker -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('sw.js')
+                    .then(registration => console.log('SW registrado:', registration))
+                    .catch(error => console.log('Error SW:', error));
+            });
+        }
+    </script>
+</body>
+</html>
